@@ -13,11 +13,11 @@ export class AuthService {
     const user = await this.usersService.findOne(username);
     console.log(user);
     if (user?.password !== pass) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('Wrong Password!');
     }
-    const payload = { sub: user.id, username: user.username };
+    const payload = { sub: user.id, username: user.username, role: user.role };
     return {
-      access_token: await this.jwtService.signAsync(payload),
+      access_token: await this.jwtService.signAsync(payload)
     };
   }
 }

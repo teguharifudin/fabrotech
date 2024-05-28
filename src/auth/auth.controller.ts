@@ -18,4 +18,10 @@ export class AuthController {
   signIn(@Body() signInDto: CreateUserDto) {
     return this.authService.signIn(signInDto.username, signInDto.password);
   }
+
+  @UseGuards(AuthGuard)
+  @Get('profile')
+  getProfile(@Request() req) {
+    return req.user;
+  }
 }

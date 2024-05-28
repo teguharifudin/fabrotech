@@ -17,6 +17,7 @@ export class UsersService {
     user.username = createUserDto.username;
     user.password = createUserDto.password;
     user.email = createUserDto.email;
+    user.role = createUserDto.role;
     return this.userRepository.save(user);
   }
 
@@ -27,12 +28,4 @@ export class UsersService {
   findOne(username: string) { 
     return this.userRepository.findOneBy({ username });
   }
-
-  // update(id: number, updateUserDto: UpdateUserDto) {
-  //   return `This action updates a #${id} user`;
-  // }
-
-  // remove(id: number) {
-  //   return `This action removes a #${id} user`;
-  // }
 }
