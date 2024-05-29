@@ -24,4 +24,10 @@ export class AuthController {
   getProfile(@Request() req) {
     return req.user;
   }
+
+  @Get('/logout')
+  logout(@Request() req): any {
+    req.session.destroy();
+    return { msg: 'The user session has ended' }
+  }
 }

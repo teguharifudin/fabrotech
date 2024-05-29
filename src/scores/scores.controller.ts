@@ -1,5 +1,7 @@
 import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../auth/auth.guard';
+import { RolesGuard } from '../auth/roles.guard';
+import { Roles } from '../auth/roles.decorator';
 
 import { ScoresService } from './scores.service';
 import { CreateScoreDto } from './dto/create-score.dto';
@@ -8,7 +10,8 @@ import { CreateScoreDto } from './dto/create-score.dto';
 export class ScoresController {
   constructor(private readonly scoresService: ScoresService) {}
 
-  @UseGuards(AuthGuard)
+  @Roles('admin')
+  @UseGuards(AuthGuard, RolesGuard)
   @Post()
   create(@Body() createScoreDto: CreateScoreDto) {
     return this.scoresService.create(createScoreDto);
